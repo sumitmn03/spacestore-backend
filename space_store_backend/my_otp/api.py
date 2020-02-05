@@ -1,14 +1,14 @@
+from rest_framework import (
+    generics,
+    permissions,
+    viewsets
+)
 from rest_framework.response import Response
 from django.core.mail import send_mail
 from django.conf import settings
 
 import random
 
-from rest_framework import (
-    generics,
-    permissions,
-    viewsets
-)
 from rest_framework.viewsets import ModelViewSet
 
 from .serializers import EmailOtpSerializer

@@ -61,6 +61,10 @@ INSTALLED_APPS = [
     'saved_for_later',
     'wishlist',
     'addresses',
+    'product_details',
+    'review_rating_qna',
+    'images',
+    'homepage'
 ]
 
 REST_FRAMEWORK = {

@@ -13,9 +13,9 @@ class Address(models.Model):
     locality = models.CharField(max_length=50)
     # landmark is optional
     landmark = models.CharField(max_length=50, blank=True, null=True)
-    city = models.CharField(max_length=60)
+    city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
-    country = models.CharField(max_length=55)
+    country = models.CharField(max_length=50)
     pin_code = models.IntegerField()
     # optional
     alt_phone = models.IntegerField(blank=True, null=True)

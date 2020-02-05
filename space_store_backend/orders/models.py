@@ -8,8 +8,10 @@ User = get_user_model()
 class Order(models.Model):
     current_user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='orders', default=62)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='product_order')
+    address = models.ForeignKey(
+        Address, on_delete=models.CASCADE, related_name='address_order')
     order_datetime = models.DateTimeField(auto_now_add=True)
     # delivery status - 1. Waiting for approval 2. Approved 3. Shipped. 4. Out for delivery 5. Out of delivery 6. Delivered 7. Picked up 8. Confirmed by the seller 9. Returned
     delivery_status = models.CharField(max_length=15, default="Delivered")

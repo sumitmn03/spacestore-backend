@@ -7,7 +7,8 @@ User = get_user_model()
 class Wishlist(models.Model):
     current_user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='wishlist_items', default=62)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='wishlist_items')
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

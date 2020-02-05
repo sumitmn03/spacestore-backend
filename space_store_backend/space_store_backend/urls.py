@@ -13,6 +13,8 @@ urlpatterns = [
     path('', include('wishlist.urls')),
     path('', include('addresses.urls')),
     path('', include('my_otp.urls')),
+    path('', include('review_rating_qna.urls')),
+    path('', include('homepage.urls')),
     path('admin/', admin.site.urls),
 ]
 

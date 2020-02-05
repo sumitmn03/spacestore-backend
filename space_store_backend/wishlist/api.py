@@ -1,5 +1,4 @@
 from rest_framework import viewsets, permissions
-from .models import Wishlist
 from .serializers import WishlistSerializer
 
 

@@ -10,7 +10,7 @@ class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
 
     def get_queryset(self):
-        return self.request.user.addresses.all()
+        return self.request.user.addresses.all().order_by('-timestamp')
 
     def perform_create(self, serializer):
         serializer.save(current_user=self.request.user)
