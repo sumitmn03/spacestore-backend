@@ -15,6 +15,7 @@ urlpatterns = [
     path('', include('my_otp.urls')),
     path('', include('review_rating_qna.urls')),
     path('', include('homepage.urls')),
+    path('', include('checkout.urls')),
     path('admin/', admin.site.urls),
 ]
 

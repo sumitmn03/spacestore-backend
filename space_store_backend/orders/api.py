@@ -1,6 +1,8 @@
 from rest_framework import viewsets, permissions
 from .models import Order
-from .serializers import OrderSerializer, OrderDetailSerializer
+from .serializers import OrderSerializer, PostOrderSerializer
+
+# this is used to get order data
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -13,16 +15,14 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.orders.all().order_by('-order_datetime')
 
-    def perform_create(self, serializer):
-        serializer.save(current_user=self.request.user)
 
-
-class OrderDetailViewSet(viewsets.ModelViewSet):
+# this is used to post order datas
+class PostOrderViewSet(viewsets.ModelViewSet):
 
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = OrderDetailSerializer
+    serializer_class = PostOrderSerializer
 
     def get_queryset(self):
         return self.request.user.orders.all()

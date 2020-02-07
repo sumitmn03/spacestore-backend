@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from .models import Wishlist
-from products.serializers import ProductSerializer
+from products.serializers import NormalProductSerializer
 
 
 class WishlistSerializer(ModelSerializer):
@@ -11,7 +11,7 @@ class WishlistSerializer(ModelSerializer):
         fields = ['id', 'product', 'wishlist_product']
 
     def get_wishlist_product(self, obj):
-        return ProductSerializer(obj.product).data
+        return NormalProductSerializer(obj.product).data
 
     def create(self, validated_data):
         current_user = validated_data.get('current_user')

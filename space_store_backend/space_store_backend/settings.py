@@ -64,7 +64,8 @@ INSTALLED_APPS = [
     'product_details',
     'review_rating_qna',
     'images',
-    'homepage'
+    'homepage',
+    'checkout'
 ]
 
 REST_FRAMEWORK = {

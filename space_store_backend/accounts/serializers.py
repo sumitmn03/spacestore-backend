@@ -2,6 +2,8 @@ from rest_framework import serializers
 from rest_framework.serializers import SerializerMethodField
 from django.contrib.auth import authenticate
 from .models import UserProfile
+from checkout.serializers import CheckoutSerializer
+from checkout.models import Checkout
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -17,11 +19,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     profile = UserProfileSerializer()
+    checkout_id = SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'phone_no', 'profile')
+        fields = ('id', 'email', 'phone_no', 'profile', 'checkout_id')
 
+    def get_checkout_id(self, obj):
+        return obj.checkout_datas.id
 
 # User Update Serializer
 

@@ -1,9 +1,10 @@
 from rest_framework import routers
-from .api import OrderViewSet, OrderDetailViewSet
+from .api import OrderViewSet, PostOrderViewSet
 
 router = routers.DefaultRouter()
 
+# this is used to get order data
 router.register('api/orders', OrderViewSet, 'orders'),
-router.register('api/orderdetail', OrderDetailViewSet, 'order_detail')
+router.register('api/post_order', PostOrderViewSet, 'post_order'),
 
 urlpatterns = router.urls

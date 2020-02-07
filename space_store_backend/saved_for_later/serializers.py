@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from .models import SavedForLater
-from products.serializers import ProductSerializer
+from products.serializers import NormalProductSerializer
 
 
 class SavedForLaterSerializer(ModelSerializer):
@@ -11,7 +11,7 @@ class SavedForLaterSerializer(ModelSerializer):
         fields = ['id', 'product', 'sfl_product']
 
     def get_sfl_product(self, obj):
-        return ProductSerializer(obj.product).data
+        return NormalProductSerializer(obj.product).data
 
     def create(self, validated_data):
         current_user = validated_data.get('current_user')

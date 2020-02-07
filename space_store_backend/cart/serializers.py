@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from .models import Cart
-from products.serializers import ProductSerializer
+from products.serializers import NormalProductSerializer
 
 
 class CartSerializer(ModelSerializer):
@@ -11,7 +11,7 @@ class CartSerializer(ModelSerializer):
         fields = ['id', 'product', 'cart_product']
 
     def get_cart_product(self, obj):
-        return ProductSerializer(obj.product).data
+        return NormalProductSerializer(obj.product).data
 
     def create(self, validated_data):
         current_user = validated_data.get('current_user')
