@@ -15,7 +15,7 @@ class CheckoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Checkout
         fields = ['id', 'user', 'cart_or_single',
-                  'product', 'address', 'payment_mode', 'address_data', 'checkout_datas']
+                  'product', 'size', 'quantity', 'address', 'payment_mode', 'address_data', 'checkout_datas']
 
     def get_address_data(self, obj):
         return AddressSerializer(obj.address).data

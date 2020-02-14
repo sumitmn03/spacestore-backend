@@ -11,6 +11,8 @@ class Checkout(models.Model):
     cart_or_single = models.CharField(max_length=6, null=True, blank=True)
     product = models.ForeignKey(
         Product, on_delete=models.SET_NULL, related_name='checkout_datas', null=True, blank=True)
+    size = models.CharField(max_length=7, null=True, blank=True)
+    quantity = models.IntegerField(null=True, blank=True)
     address = models.OneToOneField(
         Address, on_delete=models.SET_NULL, related_name='checkout_datas', null=True, blank=True)
     payment_mode = models.CharField(max_length=20, null=True, blank=True)

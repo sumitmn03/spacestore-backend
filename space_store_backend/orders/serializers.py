@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
-from .models import Order
-from products.serializers import ProductSerializer
+from .models import Order, ParentOrder
+from products.serializers import ProductSerializer, NormalProductSerializer
 from addresses.serializers import AddressSerializer
 
 
@@ -8,12 +8,11 @@ from addresses.serializers import AddressSerializer
 class OrderSerializer(ModelSerializer):
     order_date = SerializerMethodField()
     delivery_date = SerializerMethodField()
-    product = ProductSerializer()
-    address = AddressSerializer()
+    product = NormalProductSerializer()
 
     class Meta:
         model = Order
-        fields = ['id', 'product', 'size', 'quantity',  'address', 'original_price', 'seller_discount', 'shipping_charges', 'delivery_status', 'order_date',
+        fields = ['order_id', 'parent_order', 'product', 'size', 'quantity',   'original_price', 'seller_discount', 'shipping_charges', 'delivery_status', 'order_date',
                   'delivery_date']
 
     def get_order_date(self, obj):
@@ -28,3 +27,16 @@ class PostOrderSerializer(ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
+
+    def create(self, validated_data):
+        return Order.objects.create(**validated_data)
+
+
+class ParentOrderSerializer(ModelSerializer):
+    children_orders = OrderSerializer(many=True)
+    address = AddressSerializer()
+
+    class Meta:
+        model = ParentOrder
+        fields = ['order_id', 'current_user', 'address',
+                  'order_datetime', 'children_orders']

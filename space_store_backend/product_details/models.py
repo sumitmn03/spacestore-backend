@@ -25,6 +25,8 @@ class SizeAndQuantity(models.Model):
         return "{} {} of size {} available".format(self.quantity, self.product, self.size)
 
 
+# user in the product page
+# eg. fabric : cotton blend, wash: washing machine
 class ProductDetails(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name='product_details', default=62)

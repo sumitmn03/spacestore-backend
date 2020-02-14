@@ -30,13 +30,13 @@ class SingleProductSerializer(ModelSerializer):
     reviews = SerializerMethodField()
     q_n_as = SerializerMethodField()
     product_images = SerializerMethodField()
-    item_in_cart = SerializerMethodField()
+    # item_in_cart = SerializerMethodField()
     item_in_wishlist = SerializerMethodField()
 
     class Meta:
         model = Product
         fields = ['id', 'name', 'product_type', 'product_color', 'product_design_type', 'search_kw',  'original_price', 'seller_discount',
-                  'image', 'rating', 'description', 'time_stamp', 'deleted', 'size_n_quantity', 'product_details', 'reviews', 'q_n_as', 'product_images', 'item_in_cart', 'item_in_wishlist']
+                  'image', 'rating', 'description', 'time_stamp', 'deleted', 'size_n_quantity', 'product_details', 'reviews', 'q_n_as', 'product_images',  'item_in_wishlist']  # 'item_in_cart',
 
     def get_reviews(self, obj):
         p_reviews = obj.reviews.all()[:3]
@@ -50,11 +50,11 @@ class SingleProductSerializer(ModelSerializer):
         images = obj.product_images.all().order_by('position')
         return ImageSerializer(instance=images, many=True).data
 
-    def get_item_in_cart(self, obj):
-        if (not self.context['is_anonymous']):
-            if obj.cart_items.filter(current_user=self.context["user"]).exists():
-                return True
-        return False
+    # def get_item_in_cart(self, obj):
+    #     if (not self.context['is_anonymous']):
+    #         if obj.cart_items.filter(current_user=self.context["user"]).exists():
+    #             return True
+    #     return False
 
     def get_item_in_wishlist(self, obj):
         if (not self.context['is_anonymous']):
