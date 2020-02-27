@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
-from .models import Order, ParentOrder
+from .models import Order, ParentOrder, ReturnReason
 from products.serializers import ProductSerializer, NormalProductSerializer
 from addresses.serializers import AddressSerializer
 
@@ -12,8 +12,8 @@ class OrderSerializer(ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['order_id', 'parent_order', 'product', 'size', 'quantity',   'original_price', 'seller_discount', 'shipping_charges', 'delivery_status', 'order_date',
-                  'delivery_date']
+        fields = ['order_id', 'parent_order', 'product', 'size', 'quantity', 'current_price',
+                  'seller_discount', 'shipping_charges', 'delivery_status', 'invoice', 'order_date', 'delivery_date']
 
     def get_order_date(self, obj):
         return obj.order_datetime.date()
@@ -40,3 +40,9 @@ class ParentOrderSerializer(ModelSerializer):
         model = ParentOrder
         fields = ['order_id', 'current_user', 'address',
                   'order_datetime', 'children_orders']
+
+
+class ReturnReasonSerializer(ModelSerializer):
+    class Meta:
+        model = ReturnReason
+        fields = '__all__'

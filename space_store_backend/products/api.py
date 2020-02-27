@@ -65,7 +65,7 @@ class SearchViewset(generics.ListCreateAPIView):
         design_type_q = Q()
 
         for query in design_type_queries:
-            design_type_q |= Q(product_design_type__icontains=query)
+            design_type_q |= Q(search_kw__icontains=query)
 
         size_q = Q()
 

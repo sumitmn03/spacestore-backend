@@ -1,7 +1,10 @@
+# import os
+# from django.http import HttpResponse
+# from wsgiref.util import FileWrapper
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
-from .models import Order, ParentOrder
-from .serializers import OrderSerializer, PostOrderSerializer, ParentOrderSerializer
+from .models import Order, ParentOrder, ReturnReason
+from .serializers import OrderSerializer, PostOrderSerializer, ParentOrderSerializer, ReturnReasonSerializer
 
 from accounts.serializers import UserSerializer
 from addresses.models import Address
@@ -21,6 +24,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.orders.all().order_by('-order_datetime')
+
+# this is used for the parent order
 
 
 class ParentOrderViewSet(viewsets.ModelViewSet):
@@ -65,6 +70,25 @@ class PostOrderViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):
-        print("hello there")
         serializer.save(current_user=self.request.user,
                         parent_order=self.parent_order)
+
+
+class ReturnReasonViewSet(viewsets.ModelViewSet):
+
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = ReturnReasonSerializer
+
+    def get_queryset(self):
+        return ReturnReason.objects.all()
+
+
+# def pdf_download(request, filename):
+#     path = os.expanduser('~/space_store_backend/media/invoices/')
+#     f = open(path+filename, "r")
+#     response = HttpResponse(FileWrapper(f), content_type='application/pdf')
+#     response['Content-Disposition'] = 'attachment; filename=resume.pdf'
+#     f.close()
+#     return response

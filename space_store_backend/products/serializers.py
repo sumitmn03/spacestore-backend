@@ -18,7 +18,7 @@ class ProductSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'product_type', 'product_color', 'product_design_type', 'search_kw',  'original_price', 'seller_discount',
+        fields = ['id', 'name', 'product_type', 'product_color', 'search_kw',  'current_price', 'seller_discount',
                   'image', 'rating', 'time_stamp', 'deleted', 'size_n_quantity']
 
 # same as above but it loads more data and is used to get only one product and its detail
@@ -35,7 +35,7 @@ class SingleProductSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'product_type', 'product_color', 'product_design_type', 'search_kw',  'original_price', 'seller_discount',
+        fields = ['id', 'name', 'product_type', 'product_color', 'search_kw',  'current_price', 'seller_discount',
                   'image', 'rating', 'description', 'time_stamp', 'deleted', 'size_n_quantity', 'product_details', 'reviews', 'q_n_as', 'product_images',  'item_in_wishlist']  # 'item_in_cart',
 
     def get_reviews(self, obj):
@@ -69,7 +69,7 @@ class ProductReviewSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name',  'original_price', 'seller_discount',
+        fields = ['id', 'name',  'current_price', 'seller_discount',
                   'image', 'rating', 'reviews']
 
     def get_reviews(self, obj):
@@ -84,7 +84,7 @@ class ProductQnaSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name',  'original_price', 'seller_discount',
+        fields = ['id', 'name',  'current_price', 'seller_discount',
                   'image', 'rating', 'q_n_as']
 
     def get_q_n_as(self, obj):
@@ -95,7 +95,7 @@ class ProductQnaSerializer(ModelSerializer):
 class NormalProductSerializer(ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'original_price',
+        fields = ['id', 'name', 'current_price',
                   'seller_discount', 'image', 'rating']
 
 
